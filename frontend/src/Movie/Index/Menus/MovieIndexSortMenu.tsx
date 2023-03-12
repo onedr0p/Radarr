@@ -7,18 +7,10 @@ import { align, sortDirections } from 'Helpers/Props';
 import translate from 'Utilities/String/translate';
 
 function MovieIndexSortMenu(props) {
-  const {
-    sortKey,
-    sortDirection,
-    isDisabled,
-    onSortSelect
-  } = props;
+  const { sortKey, sortDirection, isDisabled, onSortSelect } = props;
 
   return (
-    <SortMenu
-      isDisabled={isDisabled}
-      alignMenu={align.RIGHT}
-    >
+    <SortMenu isDisabled={isDisabled} alignMenu={align.RIGHT}>
       <MenuContent>
         <SortMenuItem
           name="status"
@@ -172,7 +164,7 @@ MovieIndexSortMenu.propTypes = {
   sortKey: PropTypes.string,
   sortDirection: PropTypes.oneOf(sortDirections.all),
   isDisabled: PropTypes.bool.isRequired,
-  onSortSelect: PropTypes.func.isRequired
+  onSortSelect: PropTypes.func.isRequired,
 };
 
 export default MovieIndexSortMenu;

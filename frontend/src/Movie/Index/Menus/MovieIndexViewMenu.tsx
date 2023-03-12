@@ -7,31 +7,16 @@ import { align } from 'Helpers/Props';
 import translate from 'Utilities/String/translate';
 
 function MovieIndexViewMenu(props) {
-  const {
-    view,
-    isDisabled,
-    onViewSelect
-  } = props;
+  const { view, isDisabled, onViewSelect } = props;
 
   return (
-    <ViewMenu
-      isDisabled={isDisabled}
-      alignMenu={align.RIGHT}
-    >
+    <ViewMenu isDisabled={isDisabled} alignMenu={align.RIGHT}>
       <MenuContent>
-        <ViewMenuItem
-          name="table"
-          selectedView={view}
-          onPress={onViewSelect}
-        >
+        <ViewMenuItem name="table" selectedView={view} onPress={onViewSelect}>
           {translate('Table')}
         </ViewMenuItem>
 
-        <ViewMenuItem
-          name="posters"
-          selectedView={view}
-          onPress={onViewSelect}
-        >
+        <ViewMenuItem name="posters" selectedView={view} onPress={onViewSelect}>
           {translate('Posters')}
         </ViewMenuItem>
 
@@ -50,7 +35,7 @@ function MovieIndexViewMenu(props) {
 MovieIndexViewMenu.propTypes = {
   view: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool.isRequired,
-  onViewSelect: PropTypes.func.isRequired
+  onViewSelect: PropTypes.func.isRequired,
 };
 
 export default MovieIndexViewMenu;
