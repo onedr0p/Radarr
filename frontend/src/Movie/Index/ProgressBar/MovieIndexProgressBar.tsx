@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import ProgressBar from 'Components/ProgressBar';
 import { sizes } from 'Helpers/Props';
@@ -7,7 +6,19 @@ import getStatusStyle from 'Utilities/Movie/getStatusStyle';
 import translate from 'Utilities/String/translate';
 import styles from './MovieIndexProgressBar.css';
 
-function MovieIndexProgressBar(props) {
+interface MovieIndexProgressBarProps {
+  monitored: boolean;
+  status: string;
+  hasFile: boolean;
+  isAvailable: boolean;
+  posterWidth: number;
+  detailedProgressBar: boolean;
+  bottomRadius: boolean;
+  queueStatus: string;
+  queueState: string;
+}
+
+function MovieIndexProgressBar(props: MovieIndexProgressBarProps) {
   const {
     monitored,
     status,
@@ -17,12 +28,12 @@ function MovieIndexProgressBar(props) {
     detailedProgressBar,
     bottomRadius,
     queueStatus,
-    queueState
+    queueState,
   } = props;
 
   const progress = 100;
   const queueStatusText = getQueueStatusText(queueStatus, queueState);
-  let movieStatus = (status === 'released' && hasFile) ? 'downloaded' : status;
+  let movieStatus = status === 'released' && hasFile ? 'downloaded' : status;
 
   if (movieStatus === 'deleted') {
     movieStatus = 'Missing';
@@ -41,31 +52,24 @@ function MovieIndexProgressBar(props) {
   return (
     <ProgressBar
       className={styles.progressBar}
-      containerClassName={bottomRadius ? styles.progressRadius : styles.progress}
+      containerClassName={
+        bottomRadius ? styles.progressRadius : styles.progress
+      }
       progress={progress}
-      kind={getStatusStyle(status, monitored, hasFile, isAvailable, 'kinds', queueStatusText)}
+      kind={getStatusStyle(
+        status,
+        monitored,
+        hasFile,
+        isAvailable,
+        'kinds',
+        queueStatusText
+      )}
       size={detailedProgressBar ? sizes.MEDIUM : sizes.SMALL}
       showText={detailedProgressBar}
       width={posterWidth}
-      text={(queueStatusText) ? queueStatusText : translate(movieStatus)}
+      text={queueStatusText ? queueStatusText : translate(movieStatus)}
     />
   );
 }
-
-MovieIndexProgressBar.propTypes = {
-  monitored: PropTypes.bool.isRequired,
-  hasFile: PropTypes.bool.isRequired,
-  bottomRadius: PropTypes.bool,
-  isAvailable: PropTypes.bool.isRequired,
-  status: PropTypes.string.isRequired,
-  posterWidth: PropTypes.number.isRequired,
-  detailedProgressBar: PropTypes.bool.isRequired,
-  queueStatus: PropTypes.string,
-  queueState: PropTypes.string
-};
-
-MovieIndexProgressBar.defaultProps = {
-  bottomRadius: false
-};
 
 export default MovieIndexProgressBar;

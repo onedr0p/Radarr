@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { setMovieTableOption } from 'Store/Actions/movieIndexActions';
-import MovieIndexHeader from './MovieIndexHeader';
+import MovieIndexHeader from './MovieIndexTableHeader';
 
 function createMapDispatchToProps(dispatch, props) {
   return {
